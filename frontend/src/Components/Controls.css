@@ -1,0 +1,45 @@
+.controls{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100vh;
+    background-color: black;
+    text-align: center;
+    justify-content: center;
+}
+#start{
+    background-color: rgb(120, 200, 0);
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+}
+#maze_generator{
+    background-color: purple;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+}
+#clear{
+    background-color: grey;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+}
+#algorithm_slct{
+    background-color: rgb(224, 145, 0);
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+}
+
+#algorithm_slct:hover, #clear:hover, #start:hover, #maze_generator:hover{
+    cursor: pointer;
+}
