@@ -1,33 +1,82 @@
 import React, {useState, useEffect} from 'react';
-import Maze from './Components/Maze';
+import Map from './Components/Map';
 import Controls from './Components/Controls';
 import Display from './Components/Display';
 import './App.css';
 
 function App() {
-  const [maze, setMaze] = useState([]);
+  const [map, setMap] = useState([]); /*map represented by array*/
+  const [points, setPoints] = useState([]) /* start and end points */
+  const [running, setRunning] = useState(false) /*if the pathfinder algo is running*/
+  const [ready, setReady] = useState(false) /* True if the points have been chosen and wall construction is finished*/
 
   // useEffect(()=>{
-  //   fetchMaze();
+  //   fetchMap();
   // },[]);
 
-  /* Function to generate a maze */
-  const fetchMaze = async () =>{
+  /* Function to fetch the map array from backend  */
+  const getMap = async () => {
     try{
-        const response = await fetch('http://127.0.0.1:5000/generate_maze');
+        const response = await fetch('http://127.0.0.1:5000/fetch_map');
         const data = await response.json();
 
         console.log(data);
-        setMaze(data);
+        setMap(data);
     }
     catch(error){
-        console.error('Failed to generate maze: ', error)
+        console.error('Failed to get map: ', error);
     }
-}
+  }
+
+  console.log(points.length)
+  /*function to update map array*/
+  const updateMap = async (i, j, value) => {
+    /*update map based on tile clicks and other events*/
+    try{
+      const response = await fetch('http://127.0.0.1:5000/update_map',
+      {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({i,j,value})
+      });
+      
+      const data = await response.json();
+
+      console.log(data);
+      setMap(data);
+    }
+    catch(error){
+        console.error('Failed to get map: ', error);
+    }
+  }
+
+  /*Function runs with selected algorithm once the Controls component's start button is clicked */
+  const start = (algo) => {
+    console.log("Running Algorithm");
+  }
+
+  /*function to handle cell clicks */
+  const cellClick = (i,j) => {
+    console.log(i + " " + j);
+    if(points.length === 0){
+      updateMap(i, j, 2)
+      let p = [i,j]
+      setPoints(p)
+    }
+    if(points.length === 2){
+      updateMap(i, j, 3)
+      let p = [points[0], points[1], i, j]
+      setPoints(p)
+    }
+    if(points.length === 4 && !ready ){
+      updateMap(i, j, 1)
+    }
+  }
+
   return (
     <div className="App">
-      <Controls fetchMaze={fetchMaze}/>
-      <Maze maze = {maze}/>
+      <Controls fetchMap={getMap}/>
+      <Map main_map = {map} cellClick={cellClick}/>
     </div>
   );
 }

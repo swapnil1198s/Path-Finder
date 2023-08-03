@@ -15,7 +15,7 @@
     margin: 5px;
     padding: 5px;
 }
-#maze_generator{
+#map_generator{
     background-color: purple;
     color: white;
     font-size: 25px;
@@ -40,6 +40,6 @@
     padding: 5px;
 }
 
-#algorithm_slct:hover, #clear:hover, #start:hover, #maze_generator:hover{
+#algorithm_slct:hover, #clear:hover, #start:hover, #map_generator:hover{
     cursor: pointer;
 }
