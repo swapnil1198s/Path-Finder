@@ -11,8 +11,8 @@
   }
   
 .map-cell {
-    width: 5vw;
-    height: 5vw;
+    width: 2.5vw;
+    height: 2.5vw;
   }
 
 .map-cell:hover{
@@ -30,7 +30,7 @@
   }
   
 .map-cell-2 {
-    background-color: white;
+    background-color: greenyellow;
     background-image: url(../images/start.png);
     background-size: contain;
     background-position: center;
@@ -38,10 +38,11 @@
   }
   
 .map-cell-3 {
-    background-color: white;
+    background-color: rgb(252, 189, 71);
     background-image: url(../images/finish.png);
     background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     border: 2px black dashed;
   }
   
